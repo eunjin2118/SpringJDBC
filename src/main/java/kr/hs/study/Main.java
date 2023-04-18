@@ -5,6 +5,8 @@ import kr.hs.study.config.BeanConfigClass;
 import kr.hs.study.dto.testDTO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BeanConfigClass.class);
@@ -27,10 +29,14 @@ public class Main {
 //
 //        dao.update(t);
 
-        testDTO t = new testDTO();
-        t.setData1(1);
+//
 
-        dao.delete(t);
+        testDTO t = new testDTO();
+        List<testDTO> list = dao.select();
+        for(testDTO bean : list){
+            System.out.println("data1 : "+bean.getData1());
+            System.out.println("data2 : "+bean.getData2());
+        }
 
         ctx.close();
     }
